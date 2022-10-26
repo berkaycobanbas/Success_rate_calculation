@@ -14,10 +14,20 @@ class _SuccessRateCalculationScreenState
   double vizeNotu = 0;
   double finalNotu = 0;
   double ortalama = 0;
+  String durum = "";
+  void durumaa() {
+    if (ortalama < 50) {
+      durum = "Kaldın";
+    } else {
+      durum = "Geçtin";
+    }
+  }
+
   void ortalamayiHesapla() {
     setState(() {
       vizeNotu = double.parse(_t1.text);
       finalNotu = double.parse(_t2.text);
+
       ortalama = (finalNotu + vizeNotu) / 2;
     });
   }
@@ -31,6 +41,7 @@ class _SuccessRateCalculationScreenState
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           ortalamayiHesapla();
+          durumaa();
         },
         child: Icon(Icons.add),
       ),
@@ -90,7 +101,7 @@ class _SuccessRateCalculationScreenState
                       text: "Ortalama :",
                       style: TextStyle(fontSize: 30, color: Colors.white)),
                   TextSpan(
-                      text: "$ortalama",
+                      text: "$ortalama" + "   $durum",
                       style:
                           const TextStyle(fontSize: 30, color: Colors.yellow)),
                 ],
